@@ -1,4 +1,4 @@
-# Claude for Legal 中文翻译版
+# Claude for Legal 中国法律改造版
 
 > 本仓库是 `claude-for-legal` 的中文翻译版，便于中文法律工作场景阅读、学习和二次适配。
 >
