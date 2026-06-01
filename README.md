@@ -9,6 +9,12 @@
 >
 > 原项目版权、许可证及上游更新归 Anthropic PBC 及原贡献者所有；本仓库仅对文档、提示词、skill 说明等内容进行中文本地化整理。
 
+## 版本说明
+
+`claude-for-legal-cn` 是 Claude for Legal 的单纯汉化版，适合下载后根据自己的法律服务场景继续改造。
+
+`claude-for-legal-chineselaw` 是在汉化基础上进一步改造过的中国法律场景版本，可直接下载和使用。
+
 面向最常见法律工作流的参考 agent、skill 和数据连接器——涵盖内部商务、隐私、产品、公司、劳动、诉讼、监管、AI 治理、IP，以及法律学习领域（法学院诊所与学生）。
 
 > **初次使用？** 请先阅读 [QUICKSTART.md](QUICKSTART.md)——60 秒完成安装。本 README 为完整参考文档。
