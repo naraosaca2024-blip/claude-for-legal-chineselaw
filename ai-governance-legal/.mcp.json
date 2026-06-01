@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "元典（法律法规·案例·企业）",
+      "description": "中国 AI 治理法律检索统一入口 — 生成式AI/算法推荐/深度合成/人脸识别/智能体等法规条文检索、行政处罚案例搜索、企业备案状态核查。覆盖 AIGC 治理、算法治理、数据安全三个核心法律体系。"
+    }
+  },
+  "recommendedCategories": [
+    "ai-governance-cn",
+    "legal-research-cn",
+    "enterprise-verification",
+    "document-management"
+  ],
+  "_notes": "外部 MCP 已全部替换为元典（yuandian）。替代原版 Slack/Google Drive。飞书集成通过全局 Lark MCP 接入，无需在此配置。生成式AI服务备案、算法备案等监管平台（国家互联网信息办公室系统）通过 WebFetch 访问，无需 MCP。"
+}

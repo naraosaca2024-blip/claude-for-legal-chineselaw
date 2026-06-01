@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "元典（法律法规·案例·企业）",
+      "description": "中国法律检索统一入口 — 法律法规全文与条文检索、裁判文书语义搜索与关键词检索、企业工商及风险信息查询、幻觉检测。覆盖法规/法条、最高法指导案例、公报案例、裁判文书网文书、企业三个 namespace。"
+    }
+  },
+  "recommendedCategories": [
+    "legal-research-cn",
+    "contract-management-cn",
+    "e-signature-cn",
+    "document-management",
+    "enterprise-verification",
+    "chat"
+  ],
+  "_notes": "外部 MCP 已全部替换为元典（yuandian）。元典通过本地 stdio 子进程运行，覆盖法律法规、案例和企业三个命名空间，替代原版 Ironclad / DocuSign / iManage / TopCounsel / Definely / Slack / Google Drive。飞书集成通过全局 Lark MCP（lark-im / lark-drive / lark-doc 等 skill）接入，无需在此单独配置。合同管理系统（法大大、简道云、泛微 OA 等）和电子签名平台（e签宝、契约锁、上上签等）目前无可用 MCP，由用户手动上传文件。"
+}

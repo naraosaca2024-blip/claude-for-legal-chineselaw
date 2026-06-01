@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "元典（法律法规·案例·企业）",
+      "description": "中国公司法务法律检索统一入口 — 公司法/证券法/反垄断法等法规条文检索、裁判文书案例语义搜索、企业工商及风险信息查询（存续状态/被执行/失信/诉讼/股权穿透）。覆盖公司治理、并购重组、法律尽调三个核心法律体系。"
+    }
+  },
+  "recommendedCategories": [
+    "corporate-cn",
+    "ma-diligence-cn",
+    "board-governance-cn",
+    "enterprise-verification",
+    "legal-research-cn",
+    "document-management"
+  ],
+  "_notes": "外部 MCP 已全部替换为元典（yuandian）。替代原版 Slack/Google Drive/Box/iManage/TopCounsel/Definely/Solve Intelligence。飞书集成通过全局 Lark MCP 接入，无需在此单独配置。数据室（坚果云/飞书/国内VDR）通过本地文件路径访问，无 MCP 集成。主体核查功能直接通过元典企业工具（company_info_by_name/enterprise_executions/enterprise_writ_agg等）实现。"
+}

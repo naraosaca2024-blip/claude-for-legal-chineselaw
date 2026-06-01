@@ -1,0 +1,5 @@
+[
+  { "event": "Scan renewals 0-180 days out, flag playbook deviations, as-of 2026-05-07", "description": "定时每周扫描——默认周一早晨运行" },
+  { "event": "Targeted scan: counterparty Acme Corp, all active agreements, surface cancel-by windows and price escalators", "description": "重新谈判或关系审查前的临时扫描" },
+  { "event": "Deviation check: contract IC-2026-00412 post-signature, compare against playbook and flag any terms outside standard", "description": "交易签署后的后续检查，确认无后期变更违反行动手册" }
+]

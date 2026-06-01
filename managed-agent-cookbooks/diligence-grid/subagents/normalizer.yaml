@@ -1,0 +1,83 @@
+# This file is a Chinese translation of the original by Anthropic PBC.
+# Original: https://github.com/anthropics/claude-for-legal
+# Licensed under Apache License 2.0
+
+name: diligence-normalizer
+model: claude-opus-4-7
+system:
+  text: |
+    你在扇出完成后接收完整的提取表格，并执行 tabular-review skill
+    中描述的规范化阶段——该阶段用于捕获所有表格审查工具的共同失败模式：
+    相同条款在不同文档间被解释不一致。
+
+    对于每个 `classify` 列：
+      - 每个 `answered` 值必须出现在选项列表中。不在列表中的值
+        是异常值——标记它们，并建议最接近的选项或 `needs_review`。
+      - 扫描可疑的少数群体集群。如果 195 份文档说 `consent_required`
+        而 5 份说 `freely_assignable`，标记这 5 份以供抽查。
+
+    对于每个 `date`、`duration` 和 `currency` 列：
+      - 检查各行之间的格式一致性。标记混合格式。
+      - 标记不合理的值：99 年期限、$0 上限、1900 年以前的日期、
+        交易中不使用的货币。
+
+    对于每个 `verbatim` 列：
+      - 你无法重新读取来源——那是提取器的范围。但你可以标记
+        可疑的释义迹象：答案中包含"大约"、"本质上"、总结性副词，
+        或源提示词中未出现的方括号。
+
+    返回标记列表和每列的摘要计数。不要重写单元格；只建议更正。
+    grid-writer 生成最终输出；你生成它写入摘要"标记"章节的标记列表。
+
+    只读。无 MCP。无写入权限。无出站网络。只返回符合 schema 的 JSON。
+tools:
+  - type: agent_toolset_20260401
+    default_config: { enabled: false }
+    configs:
+      - { name: read, enabled: true }
+      - { name: grep, enabled: true }
+mcp_servers: []
+skills: []
+callable_agents: []
+output_schema:
+  type: object
+  required: [flags, column_summary]
+  additionalProperties: false
+  properties:
+    flags:
+      type: array
+      maxItems: 5000
+      items:
+        type: object
+        additionalProperties: false
+        required: [doc_id, column_id, issue]
+        properties:
+          doc_id:        { type: string, maxLength: 64,  pattern: "^[A-Za-z0-9_.-]+$" }
+          column_id:     { type: string, maxLength: 64,  pattern: "^[a-z0-9_]+$" }
+          issue:
+            type: string
+            enum:
+              - out_of_options
+              - minority_cluster
+              - format_inconsistent
+              - implausible_value
+              - paraphrase_suspected
+              - missing_quote
+              - other
+          suggested_fix: { type: string, maxLength: 500 }
+          note:          { type: string, maxLength: 500 }
+    column_summary:
+      type: array
+      maxItems: 200
+      items:
+        type: object
+        additionalProperties: false
+        required: [column_id, answered, not_present, unclear, needs_review]
+        properties:
+          column_id:     { type: string, maxLength: 64, pattern: "^[a-z0-9_]+$" }
+          answered:      { type: integer, minimum: 0 }
+          not_present:   { type: integer, minimum: 0 }
+          unclear:       { type: integer, minimum: 0 }
+          needs_review:  { type: integer, minimum: 0 }
+          outliers:      { type: integer, minimum: 0 }
+          flagged:       { type: boolean }

@@ -1,0 +1,80 @@
+# This file is a Chinese translation of the original by Anthropic PBC.
+# Original: https://github.com/anthropics/claude-for-legal
+# Licensed under Apache License 2.0
+
+name: renewal-deadline-calculator
+model: claude-opus-4-7
+system:
+  text: |
+    你接收来自 repo-reader 的已验证合同列表。你执行纯计算：
+    对于每份合同，计算距截止日期的天数（`cancel_by_date` 或
+    `expiration_date` 中较早者减去今天），对紧急程度进行分类，
+    并与部署团队的 renewal-tracker 配置进行交叉比对——
+    前瞻窗口、续约定价和自动续约上限的行动手册立场，
+    以及升级矩阵。
+
+    将每份合同精确分类到以下一个紧急程度层级：
+      - `overdue`       — 截止日期已过
+      - `next_30_days`  — 1 至 30 天
+      - `30_to_60_days` — 31 至 60 天
+      - `60_to_90_days` — 61 至 90 天
+      - `90_to_180_days`— 91 至 180 天
+      - `outside_window`— 超过配置的前瞻期（不包含在输出中）
+
+    对于每条告警，判断是否存在部署团队行动手册中的任何偏差
+    （无上限的续约价格递增、通知窗口期过短、通知机制与团队
+    标准不符等），以及升级矩阵是否要求路由到指定审批人。
+
+    你是纯计算的。你无 MCP、无网络、无写入权限。你读取交给你的
+    结构化 JSON 和磁盘上的行动手册配置文件。只返回经 schema 验证的 JSON。
+
+tools:
+  - type: agent_toolset_20260401
+    default_config: { enabled: false }
+    configs:
+      - { name: read, enabled: true }
+      - { name: grep, enabled: true }
+      - { name: glob, enabled: true }
+
+mcp_servers: []
+skills: []
+callable_agents: []
+
+output_schema:
+  type: object
+  required: [as_of, alerts]
+  additionalProperties: false
+  properties:
+    as_of: { type: string, maxLength: 10, pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+    alerts:
+      type: array
+      maxItems: 500
+      items:
+        type: object
+        additionalProperties: false
+        required: [contract_id, deadline_type, deadline_date, days_remaining, urgency]
+        properties:
+          contract_id:    { type: string, maxLength: 64, pattern: "^[A-Za-z0-9 ._/:-]+$" }
+          counterparty:   { type: string, maxLength: 200, pattern: "^[A-Za-z0-9 .,&'()_/-]+$" }
+          deadline_type:  { type: string, maxLength: 24,  pattern: "^(cancel_by|expiration|notice_window)$" }
+          deadline_date:  { type: string, maxLength: 10,  pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+          days_remaining: { type: integer, minimum: -3650, maximum: 3650 }
+          urgency:        { type: string, maxLength: 24,  pattern: "^(overdue|next_30_days|30_to_60_days|60_to_90_days|90_to_180_days)$" }
+          recommended_action:
+            type: string
+            maxLength: 300
+          escalation_needed: { type: boolean }
+          escalation_to:
+            type: string
+            maxLength: 120
+          playbook_deviations:
+            type: array
+            maxItems: 20
+            items:
+              type: object
+              additionalProperties: false
+              required: [clause, position]
+              properties:
+                clause:   { type: string, maxLength: 64,  pattern: "^[A-Za-z0-9_ -]+$" }
+                position: { type: string, maxLength: 300 }
+                severity: { type: string, maxLength: 16,  pattern: "^(minor|moderate|critical)$" }

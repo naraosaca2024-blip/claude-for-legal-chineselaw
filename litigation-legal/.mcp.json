@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "yuandian（元典/源点）",
+      "description": "中国法律法规与案例检索（合一）— 法规/法条 / 裁判文书 / 企业信息三个 namespace 统一入口。语义搜索 + 关键词检索 + 法条详情。"
+    },
+    "feishu": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@larksuiteoapi/lark-mcp"
+      ],
+      "title": "飞书（Lark）",
+      "description": "飞书消息发送、多维表格读写、云盘文档访问。用于案件截止日提醒、外聘律师状态同步、证据保全通知。"
+    }
+  },
+  "recommendedCategories": [
+    "legal-research",
+    "case-management",
+    "documents",
+    "chat"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "元典（法律法规·案例·企业）",
+      "description": "中国数据合规法律检索统一入口 — PIPL/CSL/DSL/网络数据安全管理条例全文与条文检索、行政处罚案例语义搜索、企业个人信息保护合规风险查询。覆盖个人信息保护、数据安全、网络安全三个核心法律体系。"
+    }
+  },
+  "recommendedCategories": [
+    "privacy-cn",
+    "data-security-cn",
+    "cybersecurity-cn",
+    "compliance-cn",
+    "enterprise-verification",
+    "document-management"
+  ],
+  "_notes": "外部 MCP 已全部替换为元典（yuandian）。覆盖中国数据合规四部核心法律：PIPL（个人信息保护法）、DSL（数据安全法）、CSL（网络安全法）、网络数据安全管理条例（2025-01-01）。飞书集成通过全局 Lark MCP 接入，无需在此单独配置。"
+}

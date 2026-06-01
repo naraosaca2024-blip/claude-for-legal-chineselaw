@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "yuandian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuandian-mcp-server"
+      ],
+      "title": "元典（法律法规·案例·企业）",
+      "description": "中国法律检索统一入口 — 法律法规/条文检索、裁判文书语义搜索与关键词检索、企业工商及风险信息查询。用于 skills-qa 核验社区 skill 的法律引用质量，以及 registry-browser 实时查询法律元力注册表。"
+    }
+  },
+  "recommendedCategories": [
+    "legal-skills-registry-cn",
+    "document-management",
+    "legal-research-cn"
+  ],
+  "_notes": "外部 MCP 已全部替换为元典（yuandian）。替代原版 Slack/Google Drive/Lawve AI。飞书集成通过全局 Lark MCP 接入（lark-im/lark-doc），无需在此配置。法律元力（yuanli.ailaw.cn）注册表通过 HTTP REST API 访问，无需 MCP——见 skills/skill-installer/references/yuanli-api.md（如有）和 yuanli-toolkits.yaml（离线目录）。"
+}

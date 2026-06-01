@@ -1,0 +1,50 @@
+# This file is a Chinese translation of the original by Anthropic PBC.
+# Original: https://github.com/anthropics/claude-for-legal
+# Licensed under Apache License 2.0
+
+# Docket Watcher — 托管 Agent Cookbook
+#
+# 与诉讼法律 Claude Code 插件中的 `docket-watcher` Agent 相同。
+# 本清单将规范系统提示和 skill 解析至磁盘上的插件，
+# 以保持单一数据源。
+
+name: docket-watcher
+model: claude-opus-4-7
+
+system:
+  file: ../../litigation-legal/agents/docket-watcher.md
+  append: |
+    你以无头模式在平台团队的工作流引擎后台运行。
+    将文件输出至 ./out/；不要假设存在交互式会话。在报告前添加
+    部署团队诉讼法律 CLAUDE.md 中的工作成果抬头。
+
+    你的输出是线索，不是法律结论。计算出的期限是线索，不是日历条目。
+    法院期限规则因管辖区、法院、法官和本地规则而异，并经常通过常设命令
+    或案件特定的案件管理命令被修改。错过法院期限会产生职业过失后果。
+    执照律师在将每个计算期限正式登记入档之前，必须对照法院的实际规则
+    及任何案件特定命令进行核实。
+
+    文件分类是启发式的。Agent 误分类的文件可能产生错误的期限规则。
+    登记律师需要阅读文件本身。不得在报告中软化这些保障措辞以使输出看起来
+    更整洁——措辞明确才是正确的。
+
+tools:
+  # 编排器仅限本地工具；MCP 和 web_fetch 由子 Agent 叶节点持有（见 callable_agents）。
+  - type: agent_toolset_20260401
+    default_config: { enabled: false }
+    configs:
+      - { name: read, enabled: true }
+      - { name: grep, enabled: true }
+      - { name: glob, enabled: true }
+
+mcp_servers:
+  - { type: stdio, name: yuandian, command: npx, args: ["-y", "yuandian-mcp-server"] }
+  - { type: stdio, name: feishu,   command: npx, args: ["-y", "@larksuiteoapi/lark-mcp"] }
+
+skills:
+  - { from_plugin: ../../litigation-legal }
+
+callable_agents:
+  - { manifest: ./subagents/docket-reader.yaml }
+  - { manifest: ./subagents/deadline-mapper.yaml }
+  - { manifest: ./subagents/tracker-writer.yaml }   # 唯一拥有写入权限的叶节点

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-for-legal",
+  "description": "面向最常见法律工作流的参考 agent、skill 和数据连接器——涵盖内部商务、隐私、产品、公司、劳动、诉讼、监管、AI 治理、知识产权，以及法律学习领域（法学院诊所与学生）。",
+  "owner": {
+    "name": "Anthropic"
+  },
+  "plugins": [
+    {
+      "name": "commercial-legal",
+      "displayName": "商事合同",
+      "source": "./commercial-legal",
+      "description": "依据团队剧本审查供应商协议、NDA 及 SaaS 订阅，在截止日期前追踪续约与取消通知，路由升级至正确审批人，并将审查结果转化为业务利益相关方能够直接阅读的摘要。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "privacy-legal",
+      "displayName": "隐私合规",
+      "source": "./privacy-legal",
+      "description": "对处理活动进行分类、生成 PIA、作为控制者或处理者审查 DPA、在法定时限内起草 DSAR 响应，并监控政策与实践的漂移。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "product-legal",
+      "displayName": "产品法务",
+      "source": "./product-legal",
+      "description": "根据你的风险校准审查产品发布，在几分钟内回答'这是个问题吗？'问题，检查营销文案中需要证实的声明，并在有人询问之前标记即将需要法律关注的发布。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "corporate-legal",
+      "displayName": "公司法务",
+      "source": "./corporate-legal",
+      "description": "大规模运行并购尽调，带引用的表格审查，构建披露时间表和关闭检查清单，以内部格式起草董事会同意和会议纪要，并跨司法管辖区跟踪实体合规截止日期。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "employment-legal",
+      "displayName": "劳动法务",
+      "source": "./employment-legal",
+      "description": "审查招聘和解雇以查找司法管辖区特定的风险标志，根据控制州测试对工人进行分类，在错过截止日期之前跟踪请假截止日期，运行内部调查，并在法律不同的地方起草带有州补充的政策。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "regulatory-legal",
+      "displayName": "监管合规",
+      "source": "./regulatory-legal",
+      "description": "监视监管源，对比新规则与你的政策库，跟踪意见截止日期和开放差距，并编写你团队周一早上阅读的摘要。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "ai-governance-legal",
+      "displayName": "AI 治理合规",
+      "source": "./ai-governance-legal",
+      "description": "根据你的注册表对提议的 AI 使用案例进行分类，跨范围内的制度进行影响评估，审查供应商 AI 条款以查找数据训练和责任差距，并使你的 AI 政策与实践保持同步。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "litigation-legal",
+      "displayName": "诉讼争议",
+      "source": "./litigation-legal",
+      "description": "管理诉讼投资组合——事项、截止日期、保全、要求、外部律师——并完成工作：权利要求图表（专利和民事）、时间线、质证准备、特权日志、简报起草。适应你的诉讼工作方式：内部、律所或个人。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "law-student",
+      "displayName": "法学学习",
+      "source": "./law-student",
+      "description": "苏格拉底式提问训练、案例摘要、大纲构建、针对你所在司法管辖区的律师资格考试准备、IRAC 练习评分，以及学习计划制定——但从不替你写。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "legal-clinic",
+      "displayName": "法律诊所",
+      "source": "./legal-clinic",
+      "description": "设置诊所、让学生入职、运行结构化 intake、以防止失职的谨慎追踪截止日期，并在学期结束时交接案件——在 ABA 正式意见 512 内构建。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "legal-builder-hub",
+      "displayName": "法律技能中心",
+      "source": "./legal-builder-hub",
+      "description": "发现、评估并安装社区法律技能——在任何内容进入你的环境之前都经过安全审查关卡。",
+      "author": {
+        "name": "Anthropic"
+      }
+    },
+    {
+      "name": "ip-legal",
+      "displayName": "知识产权",
+      "source": "./ip-legal",
+      "description": "运行第一遍商标查询和自由实施分类，筛选发明披露以进行初始专利性评估，起草和分类停止侵权函和 DMCA 删除通知（发送和响应），检查开源合规，审查 IP 条款，并跟踪注册和续展截止日期。",
+      "author": {
+        "name": "Anthropic"
+      }
+    }
+  ]
+}
