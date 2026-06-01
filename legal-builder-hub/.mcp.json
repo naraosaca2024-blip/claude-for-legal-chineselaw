@@ -7,8 +7,11 @@
         "-y",
         "yuandian-mcp-server"
       ],
-      "title": "元典（法律法规·案例·企业）",
-      "description": "中国法律检索统一入口 — 法律法规/条文检索、裁判文书语义搜索与关键词检索、企业工商及风险信息查询。用于 skills-qa 核验社区 skill 的法律引用质量，以及 registry-browser 实时查询法律元力注册表。"
+      "env": {
+        "YUANDIAN_API_KEY": "<请在本地填入自己的元典 API Key>"
+      },
+      "title": "元典 MCP（示例占位，请自行配置）",
+      "description": "示例配置：本仓库不包含任何元典 API 凭据。使用前请在本地环境变量或私有配置中填入自己的元典开放平台凭据；不要把真实 API key、token 或 secret 提交到仓库。"
     }
   },
   "recommendedCategories": [

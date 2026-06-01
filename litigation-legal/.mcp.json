@@ -7,8 +7,11 @@
         "-y",
         "yuandian-mcp-server"
       ],
-      "title": "yuandian（元典/源点）",
-      "description": "中国法律法规与案例检索（合一）— 法规/法条 / 裁判文书 / 企业信息三个 namespace 统一入口。语义搜索 + 关键词检索 + 法条详情。"
+      "env": {
+        "YUANDIAN_API_KEY": "<请在本地填入自己的元典 API Key>"
+      },
+      "title": "元典 MCP（示例占位，请自行配置）",
+      "description": "示例配置：本仓库不包含任何元典 API 凭据。使用前请在本地环境变量或私有配置中填入自己的元典开放平台凭据；不要把真实 API key、token 或 secret 提交到仓库。"
     },
     "feishu": {
       "type": "stdio",
